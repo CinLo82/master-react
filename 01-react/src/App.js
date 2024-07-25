@@ -19,7 +19,7 @@ function App() {
 				<p>Master Reacts</p>
 				<div className='componentes'>
 					<TercerComponente 
-						name='Cinlo' 
+				
 						lastName='Losada' 
 						ficha={ficha_medica}
 					/>
