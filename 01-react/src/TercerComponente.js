@@ -25,8 +25,11 @@ TercerComponente.propTypes = {
     lastName: Propstypes.string.isRequired,
     ficha: Propstypes.object.isRequired
 }
-
+// eslint-disable-next-line no-lone-blocks
+{/*
 TercerComponente.defaultProps = {
     name: 'Juan',
     lastName: 'Perez'
 }
+
+*/}

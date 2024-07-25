@@ -3,6 +3,7 @@ import './App.css';
 import MiComponente from './MiComponente';
 import { SegundoComponente } from './SegundoComponente';
 import { TercerComponente } from './TercerComponente';
+import { EventosComponentes } from './EventosComponentes';
 
 function App() {
 	const ficha_medica={
@@ -18,8 +19,10 @@ function App() {
 				<img src={logo} className="App-logo" alt="logo" />
 				<p>Master Reacts</p>
 				<div className='componentes'>
+					<EventosComponentes />
+					<hr />
 					<TercerComponente 
-				
+						name='Cinlo'
 						lastName='Losada' 
 						ficha={ficha_medica}
 					/>
