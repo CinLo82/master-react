@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { AvisoComponent } from './AvisoComponent'
 
 export const PruebasComponent = () => {
         
@@ -33,15 +34,18 @@ export const PruebasComponent = () => {
             <strong className={contador >= 10 ? 'label label-green' : 'label'}>{user}</strong>
             <strong>{fecha}</strong>
             <br />
-            <input 
-                className='input'
-                type='text' 
-                onChange={ modUser } 
-                placeholder='change name'
-            />
-            <button onClick={cambiarFecha} >
-                Cambiar fecha
-            </button>
+            <p>
+                <input 
+                    className='input'
+                    type='text' 
+                    onChange={ modUser } 
+                    placeholder='change name'
+                />
+                <button onClick={cambiarFecha} >
+                    Cambiar fecha
+                </button>
+            </p>
+            { user == 'CINLO' && <AvisoComponent />}
         </div>
     )
 }
