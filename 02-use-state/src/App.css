@@ -32,7 +32,34 @@
   color: aqua;
   background-color: chocolate;
   padding: 5px;
+}
 
+.label-green {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.buttonYears{
+  background-color: #61dafb;
+  color: rgb(29, 27, 27);
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.buttonYears:hover{
+  background-color: #06410e;
+  color: white;
+}
+
+.inputYears{
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  font-weight: bold;
 }
 
 @keyframes App-logo-spin {
