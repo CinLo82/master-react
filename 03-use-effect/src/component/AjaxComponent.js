@@ -4,7 +4,7 @@ export const AjaxComponent = () => {
     
     const [users, setUsers] = useState([])
     // generico - basico
-
+/* 
     const getUsersStatic = () => {
         setUsers([
             {
@@ -27,9 +27,23 @@ export const AjaxComponent = () => {
             },
         ])
     }
+*/
+    const getUsersAjaxPms = () => {
+        fetch('https://reqres.in/api/users?page=1')
+            .then( resp => resp.json())
+            .then( data => {
+                console.log(data)
+                setUsers(data.data)
+            },
+            error => {
+                console.error(error)
+            }
+        )
+
+    }
 
     useEffect(() => {
-        getUsersStatic()
+        getUsersAjaxPms()
     },[])
 
 
