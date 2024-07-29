@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Editar } from './Editar'
 
 export const Listado = ({listadoState, setListadoState}) => {
+
+    const [editar, setEditar] = useState(0)
 
     useEffect(() => {
         console.log('Componentes de peliculas cargadas')
@@ -36,13 +39,29 @@ export const Listado = ({listadoState, setListadoState}) => {
                             <article className="peli-item" key={peli.id}>
                                 <h3 className="title">{peli.title}</h3>
                                 <p className="description">{peli.description}</p>
-                                <button className="edit">Editar</button>
+                                <button 
+                                    className="edit"
+                                    onClick={() => setEditar(peli.id)}
+                                >
+                                    Editar
+                                </button>
                                 <button 
                                     className="delete"
                                     onClick={() => borrarPeli(peli.id)}
                                 >
                                     Eliminar
                                 </button>
+
+                                {/* Aparece un formulario para editar */}
+                                {editar === peli.id && (
+                                    <Editar 
+                                        peli={peli}
+                                        conseguirPeliculas={conseguirPeliculas}
+                                        setEditar={setEditar}
+                                        setListadoState={setListadoState}
+                                    />
+                                )} 
+
                             </article>
                         )
                         
