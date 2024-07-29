@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 
 export const Listado = ({listadoState, setListadoState}) => {
 
-    // const [listadoState, setListadoState] = useState([])
-
     useEffect(() => {
         console.log('Componentes de peliculas cargadas')
         conseguirPeliculas()
@@ -13,7 +11,21 @@ export const Listado = ({listadoState, setListadoState}) => {
         let peliculas = JSON.parse(localStorage.getItem('peliculas'))
 
         setListadoState(peliculas)
+
+        return peliculas
     }
+
+    const borrarPeli = (id) => {
+        // conseguir las peliculas almacenadas
+        let pelis_almacenadas = conseguirPeliculas()
+        // filtrar esas peliculas para que se elimine la q no quiero
+        let pelis_filtradas = pelis_almacenadas.filter( peli => peli.id !== parseInt(id))
+        // actualizar el estado del listado
+        setListadoState(pelis_filtradas)
+        // actualizar los datos en el almacenamiento local
+        localStorage.setItem('peliculas', JSON.stringify(pelis_filtradas))
+    }
+
 
     return (
         <>
@@ -25,7 +37,12 @@ export const Listado = ({listadoState, setListadoState}) => {
                                 <h3 className="title">{peli.title}</h3>
                                 <p className="description">{peli.description}</p>
                                 <button className="edit">Editar</button>
-                                <button className="delete">Eliminar</button>
+                                <button 
+                                    className="delete"
+                                    onClick={() => borrarPeli(peli.id)}
+                                >
+                                    Eliminar
+                                </button>
                             </article>
                         )
                         
