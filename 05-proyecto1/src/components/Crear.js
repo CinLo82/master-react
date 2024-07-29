@@ -14,7 +14,6 @@ export const Crear = () => {
 
     const conseguirDatosForm = (e) => {
         e.preventDefault()
-        
         let target = e.target
         let title = target.title.value
         let description = target.description.value
@@ -27,11 +26,10 @@ export const Crear = () => {
         }
         // guardar estado
         setPeliState(peli)
-    
+        
         // guardar en el almacenamiento local
-        GuardarEnStorage(peli)
+        GuardarEnStorage('peliculas', peli)
     }
-
 
     return (
         <>
