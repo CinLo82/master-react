@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { GuardarEnStorage } from './helpers/GuardarEnStorage'
 
 export const Crear = () => {
 
@@ -24,9 +25,13 @@ export const Crear = () => {
             title,
             description
         }
+        // guardar estado
         setPeliState(peli)
-        console.log(peliState)
+    
+        // guardar en el almacenamiento local
+        GuardarEnStorage(peli)
     }
+
 
     return (
         <>
