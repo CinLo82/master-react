@@ -3,9 +3,9 @@ import { MisRutas } from './routes/MisRutas';
 
 function App() {
     return (
-        <>
+        <div className='layout'>
             <MisRutas />
-        </>
+        </div>
     );
 }
 
