@@ -1,25 +1,22 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { trabajos } from '../data/trabajos'
 
 export const Portafolio = () => {
     return (
         <div className='page'>
             <h1 className='heading'>Portafolio</h1>
-            <section className='portafolio'>
-                <article className='work'>
-                    <img src='https://via.placeholder.com/150' alt='imagen' />
-                    <h2>Proyecto 1</h2>
-                    <p>Descripción del proyecto 1</p>
-                </article>
-                <article className='work'>
-                    <img src='https://via.placeholder.com/150' alt='imagen' />
-                    <h2>Proyecto 2</h2>
-                    <p>Descripción del proyecto 2</p>
-                </article>
-                <article className='work'>
-                    <img src='https://via.placeholder.com/150' alt='imagen' />
-                    <h2>Proyecto 3</h2>
-                    <p>Descripción del proyecto 3</p>
-                </article>
+            <section className='works'>
+                {trabajos.map((trabajo) => (
+                    <article key={trabajo.id} className='work-item'>
+                        <div className='mask'>
+                            <img src={"/images/"+trabajo.id+".png"} />
+                        </div>
+                        <span>{trabajo.Categorias}</span>
+                        <h2><Link to={"/proyecto/" + trabajo.id}>{trabajo.name}</Link></h2>
+                        <h3>{trabajo.tecnologias}</h3>
+                    </article>
+                ))}
             </section>
         </div>
     )
