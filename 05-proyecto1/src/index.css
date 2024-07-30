@@ -205,3 +205,8 @@ input[type="button"]{
       width: 80%;
   }
 }
+
+.no-encontrado{
+  color: #ce3643;
+  margin-top: 50px;
+}
