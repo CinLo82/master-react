@@ -49,7 +49,7 @@ export const HeaderNav = () => {
                             to="/contacto"
                             className={({isActive}) => isActive ? 'active' : ''}
                         >
-                            Contact
+                            Contacto
                         </NavLink>
                     </li>
                 </ul>

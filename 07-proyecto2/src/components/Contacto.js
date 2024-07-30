@@ -8,9 +8,9 @@ export const Contacto = () => {
             <form className='contact' action='cinlos3382@gmail.com' >
                 <input type="text" placeholder='Nombre' />
                 <input type="text" placeholder='Apellido' /> 
-                <input type="email" placeholder='Email' />
+                <input type="text" placeholder='Email' />
                 <textarea placeholder='Mensaje'></textarea>
-                <input type='submit' value='enviar' />
+                <input type='submit' value='Enviar' />
             </form>
         </div>
     )

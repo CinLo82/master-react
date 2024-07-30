@@ -84,15 +84,6 @@ code {
   margin-bottom: 80px;
 }
 
-.footer{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 150px;
-  font-weight: 500;
-  background-color: #abb1b0;
-  color: black;
-}
 
 .home h1{
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -118,7 +109,9 @@ code {
   transition: all 300ms;
 }
 
-.home a:hover{
+.home a:hover,
+input[type="submit"]:hover,
+button:hover{
   background-color: rgb(91, 228, 72);
 }
 
@@ -133,4 +126,38 @@ code {
 .page .heading{
   font-size: 55px;
   font-weight: bold;
+}
+
+input[type="text"],
+textarea{
+  display: block;
+  width: 250px;
+  padding: 15px;
+  margin-top: 25px;
+  border-radius: 5px;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+  line-height: 7px;
+  font-weight: 500;
+  background-color: #abb1b0;
+  color: black;
+}
+
+input[type="submit"],
+button{
+  font-size: 16px;
+  background-color: rgb(17, 141, 141);
+  color: white;
+  border: 0px;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 300ms;
 }
