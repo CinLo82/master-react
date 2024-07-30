@@ -24,7 +24,7 @@ code {
   align-items: center;
   list-style: none;
   border-bottom: 3px solid black;
-  margin-bottom: 35px;
+  margin-bottom: 80px;
 }
 
 .header .logo,
@@ -73,12 +73,15 @@ code {
   transition: all 300ms;
 }
 
+.header .active,
 .header a:hover{
   color: rgb(17, 141, 141);
 }
 
+
 .content{
   min-height: 400px;
+  margin-bottom: 80px;
 }
 
 .footer{
@@ -89,4 +92,45 @@ code {
   font-weight: 500;
   background-color: #abb1b0;
   color: black;
+}
+
+.home h1{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-size: 50px;
+}
+
+.home strong{
+  color: rgb(17, 141, 141);
+}
+
+.home h2{
+  color: rgb(94, 92, 92);
+  font-weight: 400;
+}
+
+.home a{
+  background-color: rgb(17, 141, 141);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 300ms;
+}
+
+.home a:hover{
+  background-color: rgb(91, 228, 72);
+}
+
+.page .heading,
+.home .heading{
+  font-size: 40px;
+  font-weight: 500;
+  color: black;
+  margin-bottom: 0;
+}
+
+.page .heading{
+  font-size: 55px;
+  font-weight: bold;
 }

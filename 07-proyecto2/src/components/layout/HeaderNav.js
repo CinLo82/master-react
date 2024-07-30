@@ -12,11 +12,46 @@ export const HeaderNav = () => {
             
             <nav>
                 <ul>
-                    <li><NavLink to="/">Inicio</NavLink></li>
-                    <li><NavLink to="/portafolio">Portafolio</NavLink></li>
-                    <li><NavLink to="/servicios">Servicios</NavLink></li>
-                    <li><NavLink to="/curriculum">Curriculum</NavLink></li>
-                    <li><NavLink to="/contacto">Contacto</NavLink></li>
+                    <li>
+                        <NavLink 
+                            to="/inicio"
+                            className={({isActive}) => isActive ? 'active' : ''}
+                        >
+                            Inicio
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                            to="/portafolio"
+                            className={({isActive}) => isActive ? 'active' : ''}
+                        >
+                            Portafolio
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                            to="/servicios"
+                            className={({isActive}) => isActive ? 'active' : ''}
+                        >
+                            Servicios
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                            to="/curriculum"
+                            className={({isActive}) => isActive ? 'active' : ''}
+                        >
+                            Curriculum
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                            to="/contacto"
+                            className={({isActive}) => isActive ? 'active' : ''}
+                        >
+                            Contact
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>
