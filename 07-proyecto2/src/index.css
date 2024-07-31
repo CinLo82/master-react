@@ -100,7 +100,7 @@ code {
   font-weight: 400;
 }
 
-.home a{
+.home .title a{
   background-color: rgb(17, 141, 141);
   color: white;
   padding: 3px 10px;
@@ -109,7 +109,7 @@ code {
   transition: all 300ms;
 }
 
-.home a:hover,
+.home .title a:hover,
 input[type="submit"]:hover,
 button:hover{
   background-color: rgb(91, 228, 72);
