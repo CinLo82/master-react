@@ -2,7 +2,7 @@ export const trabajos = [
     {
         'id': 'cintialosadaweb',
         'name': 'Cintia Losada WEB',
-        'url': 'https://cintialosada.com',
+        'url': 'www.cinlo-losada.netlify.app/',
         'tecnologias': 'HTML, CSS, JS, PHP, MySQL',
         'Categorias': 'Desarrollo web',
         'descripcion': 'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
@@ -10,7 +10,7 @@ export const trabajos = [
     {
         'id': 'facebook',
         'name': 'Facebook',
-        'url': 'https://facebook.com',
+        'url': 'www.facebook.com',
         'tecnologias': 'React, Node, Mongo',
         'Categorias': 'Desarrollo web',
         'descripcion': 'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
@@ -18,7 +18,7 @@ export const trabajos = [
     {
         'id': 'twitter',
         'name': 'Twitter',
-        'url': 'https://twitter.com',
+        'url': 'www.twitter.com',
         'tecnologias': 'HTML, CSS',
         'Categorias': 'Maquetación web',
         'descripcion': 'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
@@ -26,7 +26,7 @@ export const trabajos = [
     {
         'id': 'linkedin',
         'name': 'Linkedin',
-        'url': 'https://linkedin.com',
+        'url': 'www.linkedin.com',
         'tecnologias': 'HTML, CSS, JS, PHP, MySQL',
         'Categorias': 'Desarrollo web',
         'descripcion': 'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
@@ -34,15 +34,15 @@ export const trabajos = [
     {
         'id': 'instagram',
         'name': 'Instagram',
-        'url': 'https://instagram.com',
+        'url': 'www.instagram.com',
         'tecnologias': 'HTML, CSS, JS, PHP, MySQL',
         'Categorias': 'Desarrollo web',
         'descripcion': 'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
     },
     {
-        'id': 'udemi',
-        'name': 'Udemi',
-        'url': 'https://udemi.com',
+        'id': 'udemy',
+        'name': 'Udemy',
+        'url': 'www.udemy.com/personal/home',
         'tecnologias': 'HTML, CSS, JS, PHP, MySQL',
         'Categorias': 'Desarrollo web',
         'descripcion': 'when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
