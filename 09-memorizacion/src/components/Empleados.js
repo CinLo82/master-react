@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react'
 
 export const Empleados = React.memo(
 
-    ({pagina}) => {
+    ({pagina, mensaje}) => {
 
         const [empleados, setEmpleados] = useState([])
 
@@ -24,7 +24,7 @@ export const Empleados = React.memo(
             setEmpleados(empleados)
             console.log('se ejecuto la peticion')
         }
-
+        mensaje()
     
         return (
 
