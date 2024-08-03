@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Route, Routes, BrowserRouter, NavLink } from 'react-router-dom'
 import { Inicio } from '../components/Inicio'
 import { Articulos } from '../components/Articulos'
 import { Contacto } from '../components/Contacto'
 import { Acerca } from '../components/Acerca'
 import { Login } from '../components/Login'
+import { PruebaContext } from '../context/PruebaContext'
 
 export const AppRouter = () => {
+
+    const {usuario, setUsuario} = useContext(PruebaContext)
+
     return (
         <BrowserRouter>
             <header className='header'>
@@ -15,8 +19,33 @@ export const AppRouter = () => {
                         <li><NavLink to="/">Inicio</NavLink></li>
                         <li><NavLink to="/articulos">Artículos</NavLink></li>
                         <li><NavLink to="/contacto">Contacto</NavLink></li>
-                        <li><NavLink to="/login">Login</NavLink></li>
                         <li><NavLink to="/acerca">Acerca</NavLink></li>
+                        <li>
+                            {usuario.nick !== null ? (
+                                <>
+                                    <li>
+                                        <NavLink to="/">{usuario.nick}</NavLink>
+                                    </li>
+                                    <li>
+                                        <a href='#' onClick={ e => {
+                                            e.preventDefault()
+                                            setUsuario({
+                                                nick: null,
+                                                nombre: null,
+                                                edad: null,
+                                                email: null
+                                            })
+                                        }} >Cerrar Sesion</a>
+                                    </li>
+                                </>    
+                                ) : (
+                                    <li>
+                                        <NavLink to="/login">Identificate</NavLink>
+                                    </li>
+                                )
+                                
+                            }
+                        </li>
                     </ul>
                 </nav>
             </header>

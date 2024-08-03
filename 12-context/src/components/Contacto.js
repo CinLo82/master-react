@@ -9,7 +9,7 @@ export const Contacto = () => {
         <div>
             <h1>Contacto</h1>
             <p>Información de contacto</p>
-            <p>datos context: <strong>{datoDesdeContext.duracion}</strong></p>
+            {/* <p>datos context: <strong>{datoDesdeContext.duracion}</strong></p>*/}
         </div>
     )
 }
