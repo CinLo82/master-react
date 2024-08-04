@@ -8,7 +8,13 @@ export const Inicio = () => {
         <div>
             <h1>Inicio</h1>
             <p>Página de inicio</p>
-            <p>Nombre: {usuario.nombre}</p>
+            {
+                usuario.hasOwnProperty('nick') && usuario.nick !== null ? (
+                    <p>Bienvenido {usuario.nick}</p>
+                ) : (
+                    <p>Identificate</p>
+                )
+            }
             {/* <p>Valor compartido: <strong>{compartida.nombre}</strong></p>*/}
         </div>
     )
