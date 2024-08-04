@@ -46,7 +46,7 @@
 }
 
 .mi-formulario input[type="submit"]{
-  width: 40%;
+  width: 120px;
   padding: 10px 20px;
   margin: 10px auto;
   background-color: #1d85a1;
@@ -60,4 +60,15 @@
 .mi-formulario input[type="submit"]:hover{
   background-color: #d3c946;
   color: rgb(66, 36, 14);
+}
+
+.codigo{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.enviado{
+  background-color: #48742f;
+  color: white;
+  padding: 10px;
 }

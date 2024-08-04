@@ -1,39 +1,15 @@
-import React, { useState } from 'react'
+import { useForm } from '../hook/useForm'
 
 export const MiFormulario = () => {
 
-    const [formulario, setFormulario] = useState({})
-
-    const serializarFormulario = (Formulario) => {
-        const formData = new FormData(Formulario);
-        const objetoCompleto = {};
-
-        for(let [name, value] of formData){
-            objetoCompleto[name] = value;
-        }
-        return objetoCompleto;
-    }
-
-    const enviado = (e) => {
-        e.preventDefault()
-        /* 
-        let curso = {
-            titulo: e.target.titulo.value,
-            year: e.target.year.value,
-            descripcion: e.target.descripcion.value,
-            autor: e.target.autor.value,
-            email: e.target.email.value
-        }*/
-        let curso = serializarFormulario(e.target)
-        setFormulario(curso)
-    }
+    const {formulario, enviado, cambiado} = useForm({})
 
     return (
         <div>
             <h1>Mi Formulario</h1>
             <p>Mi Formulario para guardar un curso</p>
-            <p>Curso guardado:</p>
-            <pre>
+            <p>Curso guardado:{formulario.titulo}</p>
+            <pre className='codigo'>
                 {JSON.stringify(formulario, null, 2)}
             </pre>
             <form 
@@ -44,25 +20,30 @@ export const MiFormulario = () => {
                     type="text" 
                     name="titulo" 
                     placeholder="Nombre del curso" 
+                    onChange={cambiado}
                 />
                 <input 
                     type="number" 
                     name="year" 
                     placeholder="Año de publicación" 
+                    onChange={cambiado}
                 />
                 <textarea 
                     name='descripcion' 
                     placeholder='Descripción'
+                    onChange={cambiado}
                 />
                 <input 
                     type="text" 
                     name='autor' 
                     placeholder="Autor" 
+                    onChange={cambiado}
                 />
                 <input 
                     type="email" 
                     name='email' 
                     placeholder="Correo de contacto" 
+                    onChange={cambiado}
                 />
                 <input 
                     type='submit' 
