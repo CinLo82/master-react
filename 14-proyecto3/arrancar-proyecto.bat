@@ -1,0 +1,5 @@
+start cmd.exe /k "cd C:\Program Files\MongoDB\Server\7.0\bin && mondod.exe"
+start cmd.exe /k "cd D:\programacion\victor-robles\api-rest-node && npm start"
+start cmd.exe /k "cd D:\programacion\victor-robles\master-react\14-proyecto3 && npm run dev"
+start cmd.exe /k "cd C:\Users\cinlo\AppData\Local\MongoDBCompass\c:\Users\cinlo\AppData\Local\MongoDBCompass\MongoDBCompass.exe"
+start cmd.exe /k "cd C:\Users\cinlo\AppData\Local\Postman\Postman.exe"
