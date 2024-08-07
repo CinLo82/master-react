@@ -1,13 +1,13 @@
-
+import { NavLink } from "react-router-dom"
 
 export const Nav = () => {
 	return (
 	<nav className="nav">
 		<ul>
-			<li><a href="index.html">Inicio</a></li>
-			<li><a href="peliculas.html">Películas</a></li>
-			<li><a href="series.html">Blog</a></li>
-			<li><a href="contacto.html">Contacto</a></li>
+			<li><NavLink to="/">Inicio</NavLink></li>
+			<li><NavLink to="/articulos">Articulos</NavLink></li>
+			<li><NavLink to="/crear-articulos">Crear Articulos</NavLink></li>
+			<li><NavLink to="/contacto">Contacto</NavLink></li>
 		</ul>
 	</nav>
 	)

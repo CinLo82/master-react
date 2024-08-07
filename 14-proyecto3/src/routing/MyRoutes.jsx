@@ -18,8 +18,9 @@ export const MyRoutes = () => {
                 <section id="content" className="content">
                     <Routes>
                         <Route path="/" element={<Inicio />} />
+                        <Route path="/inicio" element={<Inicio />} />
                         <Route path="/articulos" element={<Articulos />} />
-                        <Route path="/crear" element={<Crear />} />
+                        <Route path="/crear-articulos" element={<Crear />} />
                     </Routes>
                 </section>
                 <Sidebar />
