@@ -1,11 +1,12 @@
+import { MyRoutes } from "./routing/MyRoutes"
 
 
 function App() {
 
   return (
     <>
-      <div>
-      <h1>Blog con React</h1>
+      <div className="layout">
+        <MyRoutes />
       </div>
     </>
   )
