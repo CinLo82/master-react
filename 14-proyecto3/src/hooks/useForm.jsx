@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-export const useForm = (objetoInicial = {}) => {
+export const useForm = () => {
 
     const [formulario, setFormulario] = useState({})
 
-    const serializarFormulario = (Formulario) => {
-        const formData = new FormData(Formulario);
+    const serializarFormulario = (formulario) => {
+        const formData = new FormData(formulario);
         const objetoCompleto = {};
 
         for(let [name, value] of formData){
