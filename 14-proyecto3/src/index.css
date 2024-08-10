@@ -126,8 +126,10 @@ body{
 }
 
 .articulo-item .mask img{
-    width: 80%;
+    width: 90%;
+    height:80%;
     border-radius: 10px;
+
 }
 
 .jumbo{

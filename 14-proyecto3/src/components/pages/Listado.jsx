@@ -1,3 +1,4 @@
+import { Global } from "../../helpers/Global"
 
 export const Listado = ({ articles, setArticles}) => {
     return (
@@ -5,7 +6,13 @@ export const Listado = ({ articles, setArticles}) => {
             return (
                 <article className="articulo-item" key={article._id}>
                     <div className="mask">
-                        <img src="https://via.placeholder.com/300" alt="imagen" />
+                        {
+                            article.image && article.image !== "default.png" ? (
+                                <img src={`${Global.url}/imagen/${article.image}`} alt="imagen" />
+                            ) : (
+                                <img src="https://via.placeholder.com/300" alt="imagen" />
+                            )
+                        }
                     </div>
                     <div className="datos">
                         <h3 className="title">{article.title}</h3>

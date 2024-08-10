@@ -3,10 +3,9 @@ import { useForm } from "../../hooks/useForm"
 import { Peticion } from "../../helpers/Peticion"
 import { Global } from "../../helpers/Global"
 
-
 export const Crear = () => {
 
-    const {formulario, cambiado} = useForm()
+    const { formulario, cambiado } = useForm()
     const [resultado, setResultado] = useState("no_enviado")
 
     const guardarArticulo = async(e) => {
@@ -18,11 +17,27 @@ export const Crear = () => {
 
         //guardar articulo en el backend
         try {
-            let {datos, loading} = await Peticion(`${Global.url}/crear`, "POST", nuevoArticulo);
+            const { datos } = await Peticion(`${Global.url}/crear`, "POST", nuevoArticulo);
             console.log(datos);
 
             if (datos.status === "success") {
                 setResultado("guardado");
+
+                // Subir la imagen
+                const fileInput = document.querySelector("#file");
+
+                if (fileInput.files[0]) {
+                    const formData = new FormData();
+                    formData.append("file", fileInput.files[0]);
+
+                    const subida = await Peticion(`${Global.url}/subir-imagen/` + datos.article._id, "POST", formData, true);
+
+                    if (subida.datos.status === "success") {
+                        setResultado("guardado");
+                    } else {
+                        setResultado("error");
+                    }
+                }
             } else {
                 setResultado("error");
             }
@@ -30,13 +45,13 @@ export const Crear = () => {
             console.error('Error al realizar la petición:', error);
             setResultado("error");
         }
-    }
+    };
 
     return (
         <div className='jumbo'>
             <h1>Crear artículo</h1>
-            <p>Formulario para crear un artícilo</p>
-            <strong>{resultado === "guardado" ? "Articulo guardado con exito" : ""}</strong>
+            <p>Formulario para crear un artículo</p>
+            <strong>{resultado === "guardado" ? "Artículo guardado con éxito" : ""}</strong>
             <strong>{resultado === "error" ? "Los datos proporcionados son incorrectos" : ""}</strong>
             {/*Montar el formulario */}
             <form 
