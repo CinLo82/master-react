@@ -1,21 +1,29 @@
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const Sidebar = () => {
+
+    const [buscar, setbuscar] = useState("")
+    const navegar = useNavigate()
+
+    const hacerBusqueda = (e) => {
+        e.preventDefault();
+        const mi_busqueda = e.target.search_name.value;
+        if (mi_busqueda.trim() !== "") {
+            navegar(`/buscar/${mi_busqueda}`, { replace: true });
+        }
+    };
+
 return (
     <aside className="lateral">
         <div className="search">
             <h3 className="title">Buscador</h3>
-            <input type="text" name="search" id="search_field" placeholder="Buscar..." />
-            <button id="search">Buscar</button>
-        </div>
-         {/* <div className="add">
-           <h3 className="title">Añadir películas</h3>
-            <form action="add.php" method="post">
-                <input type="text" id="title" name="title" placeholder="Título" />
-                <textarea placeholder="Descripcion" id="description" >
-                </textarea>
-                <input type="submit" id="add" value="Guardar" />
+            <form onSubmit={hacerBusqueda}>
+                <input type="text" name="search_name" id="search_field" placeholder="Buscar..." />
+                <input type="submit" id="search" value="Buscar"/>
             </form>
-        </div>*/}
+        </div>
+
     </aside>
     )
 }

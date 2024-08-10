@@ -6,6 +6,7 @@ import { Nav } from "../components/layout/Nav"
 import { Header } from "../components/layout/Header"
 import { Sidebar } from "../components/layout/Sidebar"
 import { Footer } from "../components/layout/Footer"
+import { Busqueda } from "../components/pages/Busqueda"
 
 export const MyRoutes = () => {
     return (
@@ -21,6 +22,12 @@ export const MyRoutes = () => {
                         <Route path="/inicio" element={<Inicio />} />
                         <Route path="/articulos" element={<Articulos />} />
                         <Route path="/crear-articulos" element={<Crear />} />
+                        <Route path="/buscar/:busqueda" element={<Busqueda />} />
+                        <Route path="*" element={
+                            <div className="jumbo">
+                                <h1>Error 404</h1>
+                            </div>} 
+                        />
                     </Routes>
                 </section>
                 <Sidebar />
