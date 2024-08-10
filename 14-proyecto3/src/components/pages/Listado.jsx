@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Global } from "../../helpers/Global"
 import { Peticion } from "../../helpers/Peticion"
 
@@ -10,7 +11,6 @@ export const Listado = ({ articles, setArticles}) => {
                 let articleUpdate = articles.filter(article => article._id !== id)
                 setArticles(articleUpdate)
             }
-        console.log(datos);
     }
 
     return (
@@ -19,6 +19,7 @@ export const Listado = ({ articles, setArticles}) => {
                 <article className="articulo-item" key={article._id}>
                     <div className="mask">
                         {
+    
                             article.image && article.image !== "default.png" ? (
                                 <img src={`${Global.url}/imagen/${article.image}`} alt="imagen" />
                             ) : (
@@ -27,7 +28,7 @@ export const Listado = ({ articles, setArticles}) => {
                         }
                     </div>
                     <div className="datos">
-                        <h3 className="title">{article.title}</h3>
+                        <h3 className="title"><Link to={"/articulo/"+ article._id}>{article.title}</Link></h3>
                         <p className="description">{article.content}</p>
                         <button className="edit">Editar</button>
                         <button 
