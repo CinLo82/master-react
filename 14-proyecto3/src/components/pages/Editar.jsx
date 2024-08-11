@@ -68,7 +68,7 @@ export const Editar = () => {
     return (
         <div className='jumbo'>
             <h1>Editar artículo</h1>
-            <p>Formulario para editar un: {article.title} </p>
+            <p>Formulario para editar: {article.title} </p>
             <strong>{resultado === "guardado" ? "Artículo guardado con éxito" : ""}</strong>
             <strong>{resultado === "error" ? "Los datos proporcionados son incorrectos" : ""}</strong>
             {/*Montar el formulario */}

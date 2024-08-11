@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Articulos } from "../components/pages/Articulos"
 import { Crear } from "../components/pages/Crear"
 import { Inicio } from "../components/pages/Inicio"
@@ -9,6 +9,7 @@ import { Footer } from "../components/layout/Footer"
 import { Busqueda } from "../components/pages/Busqueda"
 import { Articulo } from "../components/pages/Articulo"
 import { Editar } from "../components/pages/Editar"
+import { Contacto } from "../components/pages/Contacto"
 
 export const MyRoutes = () => {
     return (
@@ -27,6 +28,7 @@ export const MyRoutes = () => {
                         <Route path="/buscar/:busqueda" element={<Busqueda />} />
                         <Route path="/articulo/:id" element={<Articulo />} />
                         <Route path="/editar/:id" element={<Editar />} />
+                        <Route path="/contacto" element={<Contacto />} />
                         <Route path="*" element={
                             <div className="jumbo">
                                 <h1>Error 404</h1>
