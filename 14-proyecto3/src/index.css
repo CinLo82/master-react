@@ -130,9 +130,9 @@ body{
 }
 
 .articulo-item mask{
-    width: 20%;
+    width: 30%;
     overflow: hidden;
-    margin-right: 40px;
+    margin: 40px;
 
 }
 
@@ -141,6 +141,11 @@ body{
     height:80%;
     border-radius: 10px;
 
+}
+
+.datos{
+    margin: 10px;
+    padding: 10px;
 }
 
 .jumbo{
@@ -167,16 +172,21 @@ body{
 }
 
 .jumbo .mask{
-    width: 80%;
-    overflow: hidden;
-    height: 550px;
-    margin: 0 auto;
+    height: 400px;
+    margin: 10px;
+}
+
+.jumbo .mask img{
+    width: 300PX;
+    height: auto;
+    border-radius: 10px;
 }
 
 .button,
 button,
 input[type="submit"],
-input[type="button"]{
+input[type="button"],
+.edit{
     text-decoration: none;
     width: 100px;
     background-color: #157bbe;
@@ -257,6 +267,11 @@ textarea{
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 5px;
+}
+
+.form-group .mask{
+    width: 100%;
+    height: auto;
 }
 
 .form-group input[type="text"],

@@ -30,7 +30,7 @@ export const Crear = () => {
                     const formData = new FormData();
                     formData.append("file", fileInput.files[0]);
 
-                    const subida = await Peticion(`${Global.url}/subir-imagen/` + datos.article._id, "POST", formData, true);
+                    const subida = await Peticion(`${Global.url}/subir-imagen/`+datos.article._id, "POST", formData, true);
 
                     if (subida.datos.status === "success") {
                         setResultado("guardado");

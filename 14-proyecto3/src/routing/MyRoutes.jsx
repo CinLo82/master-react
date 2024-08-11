@@ -8,6 +8,7 @@ import { Sidebar } from "../components/layout/Sidebar"
 import { Footer } from "../components/layout/Footer"
 import { Busqueda } from "../components/pages/Busqueda"
 import { Articulo } from "../components/pages/Articulo"
+import { Editar } from "../components/pages/Editar"
 
 export const MyRoutes = () => {
     return (
@@ -25,6 +26,7 @@ export const MyRoutes = () => {
                         <Route path="/crear-articulos" element={<Crear />} />
                         <Route path="/buscar/:busqueda" element={<Busqueda />} />
                         <Route path="/articulo/:id" element={<Articulo />} />
+                        <Route path="/editar/:id" element={<Editar />} />
                         <Route path="*" element={
                             <div className="jumbo">
                                 <h1>Error 404</h1>
