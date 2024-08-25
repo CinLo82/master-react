@@ -1,6 +1,6 @@
 import avatar from '../../../assets/img/user.png'
 
-const Nav = () => {
+export const Nav = () => {
     return (
         <nav className="navbar__container-lists">
             <ul className="container-lists__menu-list">
@@ -59,5 +59,4 @@ const Nav = () => {
     )
 }
   
-  export default Nav;
   
