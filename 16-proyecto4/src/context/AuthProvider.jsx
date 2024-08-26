@@ -6,6 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 
     const [auth, setAuth] = useState({})
+    const [counters, setCounters] = useState({})
 
     useEffect(() => {
         authUser()
@@ -34,16 +35,43 @@ export const AuthProvider = ({ children }) => {
                 },
             });
             const data = await request.json();
+            console.log('data', data);
 
             // Verifica que data.user existe antes de llamar a setAuth
             if (data && data.userProfile) {
                 setAuth(data.userProfile);
             } else {
                 setAuth({ auth: false });
-                console.error('User profile not found in response:', data);
+                console.error('Perfil de usuario no encontrado en la respuesta:', data);
             }
+
+            // Peticion para los contadores
+            const requestCounters = await fetch(Global.url + 'user/counters/' + userId, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+            });
+
+            // Verifica si la respuesta es exitosa
+            if (!requestCounters.ok) {
+                throw new Error('Error al obtener los contadores: ' + requestCounters.statusText);
+            }
+
+            const dataCounters = await requestCounters.json();
+
+            // Verifica que dataCounters no contiene un error antes de llamar a setCounters
+            if (dataCounters && dataCounters.status !== 'error') {
+                setCounters(dataCounters);
+                console.log('Contadores establecidos:', dataCounters);
+            } else {
+                setCounters({});
+                console.error('Error en la respuesta de los contadores:', dataCounters);
+            }
+
         } catch (error) {
-            console.error('Error fetching user profile:', error);
+            console.error('Error al obtener el perfil de usuario o los contadores:', error);
             setAuth({ auth: false });
         }
     }
@@ -51,7 +79,9 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
         value={{
             auth,
-            setAuth
+            setAuth,
+            counters,
+            setCounters,
         }}
     >
         {children}
