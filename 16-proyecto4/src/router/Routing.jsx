@@ -1,10 +1,11 @@
-import { Route,  Routes,  Navigate, BrowserRouter, Link } from 'react-router-dom'
+import { Route,  Routes, BrowserRouter, Link } from 'react-router-dom'
 import { PublicLayout } from '../components/layout/public/PublicLayout'
 import { Login } from '../components/user/Login'
 import { Register } from '../components/user/Register'
 import { PrivateLayout } from '../components/layout/private/PrivateLayout'
 import { Feed } from '../components/publication/Feed'
 import { AuthProvider } from '../context/AuthProvider'
+import { Logout } from '../components/user/Logout'
 
 export const Routing = () => {
     return (
@@ -19,6 +20,7 @@ export const Routing = () => {
                     <Route path="/social" element={<PrivateLayout />} >
                         <Route index element={<Feed />} />
                         <Route path="feed" element={<Feed />} />
+                        <Route path="logout" element={<Logout />} />
                 
                     </Route>
                     <Route path="*" element={
