@@ -1,6 +1,7 @@
 import avatar from '../../assets/img/user.png';
 
 export const Feed = () => {
+
     return (
         <>
             <section className="layout__content">
