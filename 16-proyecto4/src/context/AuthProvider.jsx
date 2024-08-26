@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
 
     const [auth, setAuth] = useState({})
     const [counters, setCounters] = useState({})
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         authUser()
@@ -19,7 +20,9 @@ export const AuthProvider = ({ children }) => {
 
         //comprobar si tenemos un token y un usuario
         if(!token || !user) {
+            setLoading(false)
             return setAuth({auth: false})
+
         }
         //transformar mis datos a un objeto
         const userObj = JSON.parse(user);
@@ -69,6 +72,7 @@ export const AuthProvider = ({ children }) => {
                 setCounters({});
                 console.error('Error en la respuesta de los contadores:', dataCounters);
             }
+            setLoading(false);
 
         } catch (error) {
             console.error('Error al obtener el perfil de usuario o los contadores:', error);
@@ -82,6 +86,7 @@ export const AuthProvider = ({ children }) => {
             setAuth,
             counters,
             setCounters,
+            loading
         }}
     >
         {children}

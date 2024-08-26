@@ -1,11 +1,13 @@
 import { useForm } from '../../hooks/useForm'
 import { Global } from '../../helpers/Global'
 import { useState } from 'react'
+import { useAuth } from '../../hooks/useAuth'
 
 export const Login = () => {
     const { form, handleChange } = useForm({})
     const [saved, setSaved] = useState('not_sender')
 
+    const { setAuth } = useAuth()
 
     const loginUser = async(e) => {
         e.preventDefault()
@@ -27,11 +29,21 @@ export const Login = () => {
             const data = await request.json();
             console.log(data);
 
-            // Actualiza el estado del login según la respuesta
-            setSaved('login')
+            
             // Guarda el token en el localstorage
             localStorage.setItem('token', data.token)
             localStorage.setItem('user', JSON.stringify(data.user))
+
+            // Actualiza el estado del login según la respuesta
+            setSaved('login')
+
+            // set datos del usuario en el auth
+            setAuth(data.user)
+            // Redirecciona a la página principal
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000)
+ 
 
         } catch (error) {
             console.error('Error:', error);
