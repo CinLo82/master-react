@@ -332,6 +332,13 @@ body {
     height: 100%;
 }
 
+.container-avatar__image{
+    width: 40%;
+    border-radius: 3.2rem;
+    border: 1px solid var(--color-border-textarea);
+    margin-top: 1rem;
+}
+
 .container-names__name{
     color: var( --color-text-black);
     font-size: 1.7rem;
