@@ -8,12 +8,14 @@ export const People = () => {
     const [users, setUsers] = useState([])
     const [page, setPage] = useState(1)
     const [more, setMore] = useState(true)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
             getUsers(1);
         }, [])
 
     const getUsers = async (nextPage = 1) => {
+        setLoading(true)
 
         const token = localStorage.getItem('token')
 
@@ -26,6 +28,7 @@ export const People = () => {
                 }
             })
             const data = await request.json()
+            setLoading(false)
 
             // crear un estado para poder listarlos
             if(data.users && data.status === 'success'){
@@ -35,13 +38,13 @@ export const People = () => {
                     newUsers = [...users, ...data.users]
                 }
                 setUsers(newUsers)
+                setLoading(false)
+            
+                // paginacion
+                if (users.length + data.users.length >= data.total) {
+                setMore(false)
+                }
             }
-      
-            // paginacion
-            if (users.length + data.users.length >= data.total) {
-                setMore(false);
-            }
-
         } catch (error) {
             console.error('Error al obtener los usuarios:', error)
         }
@@ -64,6 +67,7 @@ export const People = () => {
                 </header>
 
                 <div className="content__posts">
+                    
                     {
                         users.map((user) => {
                             return(
@@ -110,6 +114,7 @@ export const People = () => {
                     }
                  
                 </div>
+                { loading ? <div>Cargando...</div> : '' }
                 {
                     more && (
                         <div className="content__container-btn">
