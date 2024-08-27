@@ -6,17 +6,19 @@ import { Global } from '../../helpers/Global';
 export const People = () => {
 
     const [users, setUsers] = useState([])
+    const [page, setPage] = useState(1)
+    const [more, setMore] = useState(true)
 
     useEffect(() => {
-            getUsers();
+            getUsers(1);
         }, [])
 
-    const getUsers = async () => {
+    const getUsers = async (nextPage = 1) => {
 
         const token = localStorage.getItem('token')
 
         try {
-            const request = await fetch(Global.url + 'user/list', { 
+            const request = await fetch(Global.url + 'user/list/'+ nextPage, { 
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,14 +29,31 @@ export const People = () => {
 
             // crear un estado para poder listarlos
             if(data.users && data.status === 'success'){
-                setUsers(data.users)
+                let newUsers = data.users
+
+                if(users.length >= 1){
+                    newUsers = [...users, ...data.users]
+                }
+                setUsers(newUsers)
             }
       
             // paginacion
+            if (users.length + data.users.length >= data.total) {
+                setMore(false);
+            }
+
         } catch (error) {
-            console.log(error)
+            console.error('Error al obtener los usuarios:', error)
         }
    
+    }
+
+    const nextPage = async () => {
+
+      let next = page + 1
+        setPage(next)
+        getUsers(next)
+
     }
 
     return (
@@ -91,12 +110,15 @@ export const People = () => {
                     }
                  
                 </div>
-
-                <div className="content__container-btn">
-                    <button className="content__btn-more-post">
-                        Ver mas publicaciones
-                    </button>
-                </div>
+                {
+                    more && (
+                        <div className="content__container-btn">
+                            <button className="content__btn-more-post" onClick={nextPage}>
+                                Ver mas publicaciones
+                            </button>
+                        </div>
+                    )
+                }
                 < br />
        
             </section>
