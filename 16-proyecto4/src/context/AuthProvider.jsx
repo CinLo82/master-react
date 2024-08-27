@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }) => {
                 },
             });
             const data = await request.json();
-            console.log('data', data);
 
             // Verifica que data.user existe antes de llamar a setAuth
             if (data && data.userProfile) {
@@ -67,7 +66,6 @@ export const AuthProvider = ({ children }) => {
             // Verifica que dataCounters no contiene un error antes de llamar a setCounters
             if (dataCounters && dataCounters.status !== 'error') {
                 setCounters(dataCounters);
-                console.log('Contadores establecidos:', dataCounters);
             } else {
                 setCounters({});
                 console.error('Error en la respuesta de los contadores:', dataCounters);
