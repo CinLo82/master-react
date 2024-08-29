@@ -63,6 +63,8 @@ export const UserList = ({ users, getUsers, following, setFollowing, more, loadi
             <div className="content__posts">                
             {
                 users.map((user) => {
+                    if (!user) return null
+                    
                     return(
                         <article className="posts__post" key={user._id}>
 
@@ -70,8 +72,15 @@ export const UserList = ({ users, getUsers, following, setFollowing, more, loadi
 
                                 <div className="post__image-user">
                                     <a href="#" className="post__image-link">
-                                    {user.image !== 'default.png' && <img src={Global.url + 'user/avatar/' + user.image} className="post__user-image" alt="Foto de perfil" />}
-                                    {user.image === 'default.png' && <img src={avatar} className="post__user-image" alt="Foto de perfil" />}
+                                    {user && user.image && user.image !== 'default.png' ? (
+                                            <img
+                                                src={Global.url + 'user/avatar/' + user.image}
+                                                className="post__user-image"
+                                                alt="Foto de perfil"
+                                            />
+                                        ) : (
+                                            <img src={avatar} className="post__user-image" alt="Foto de perfil" />
+                                        )}
                                     </a>
                                 </div>
                                 <div className="post__body">
