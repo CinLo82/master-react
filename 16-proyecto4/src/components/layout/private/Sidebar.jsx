@@ -2,10 +2,41 @@ import { Link } from 'react-router-dom';
 import avatar from '../../../assets/img/user.png';
 import { Global } from '../../../helpers/Global';
 import { useAuth } from '../../../hooks/useAuth';
+import { useForm } from '../../../hooks/useForm';
+import { useState } from 'react';
 
 export const Sidebar = () => {
 
-     const { auth, counters, } = useAuth();
+    const { auth, counters, } = useAuth();
+    const { form, handleChange} = useForm()
+    const [stored, setStored] = useState('not_stored')
+
+    const savePublication = async(e) => {
+        e.preventDefault();
+        //Recoger los datos del formulario
+        let newPublication = form
+        newPublication.user = auth._id
+
+        //hacer request para guardar la bd
+        const request = await fetch(Global.url + 'publication/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+            body: JSON.stringify(newPublication)
+        })
+        if (request.ok) {
+            const newPublication = await request.json();
+            console.log(newPublication); // Verifica que la respuesta sea correcta
+            setStored('success');
+        } else {
+            setStored('error');
+        }
+
+        // subir imagen
+
+    }
 
     return (
         <>
@@ -47,16 +78,43 @@ export const Sidebar = () => {
                         </div>
                     </div>
                     <div className="aside__container-form">
-                        <form className="container-form__form-post">
+                        {stored === 'success' && (
+                            <strong className='alert alert-success'>Publicada correctamente!!</strong>
+                        )}
+                        {stored === 'error' && (
+                            <strong className='alert alert-danger'>No se ha publicado nada!!</strong>
+                        )}
+                        <form 
+                            className="container-form__form-post"
+                            onSubmit={savePublication}
+                        >
                             <div className="form-post__inputs">
-                                <label htmlFor="post" className="form-post__label">¿Que estas pesando hoy?</label>
-                                <textarea name="post" className="form-post__textarea"></textarea>
+                                <label htmlFor="text" className="form-post__label">¿Que estas pesando hoy?</label>
+                                <textarea 
+                                    name="text" 
+                                    className="form-post__textarea"
+                                    onChange={handleChange}
+                                />
                             </div>
                             <div className="form-post__inputs">
-                                <label htmlFor="image" className="form-post__label">Sube tu foto</label>
-                                <input type="file" name="image" className="form-post__image" />
+                                <label 
+                                    htmlFor="file" 
+                                    className="form-post__label"
+                                    
+                                >
+                                    Sube tu foto
+                                </label>
+                                <input 
+                                    type="file" 
+                                    name="image" 
+                                    className="form-post__image" 
+                                />
                             </div>
-                            <input type="submit" value="Enviar" className="form-post__btn-submit" disabled />
+                            <input 
+                                type="submit" 
+                                value="Enviar" 
+                                className="form-post__btn-submit" 
+                            />
                         </form>
                     </div>
                 </div>
