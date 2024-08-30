@@ -46,8 +46,8 @@ export const Following = () => {
             data.follows.forEach(follow => {
                 cleanUsers = [...cleanUsers, follow.followed]
             })
-            data.users = cleanUsers.filter(user => user); // Filtrar valores undefined o null
-            console.log(data.users);
+            data.users = cleanUsers.filter(user => user); 
+
             // crear un estado para poder listarlos
             if(data.follows && data.status === 'success'){
                 let newUsers = data.users

@@ -20,7 +20,6 @@ export const GetProfile = async ({userId, setUserProfile}) => {
         const data = await request.json()
         if(data.status === 'success'){
             setUserProfile(data.userProfile)
-            console.log('userProfile updated:', data.userProfile)
         }
     } catch (error) {
         console.error('Error al obtener el perfil:', error)

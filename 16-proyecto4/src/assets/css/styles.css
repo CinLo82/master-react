@@ -158,7 +158,6 @@ body {
    
 }
 
-
 .content__title, .aside__title{
     font-size: 3.5rem;
     margin-right: 1rem;
@@ -175,12 +174,14 @@ body {
     cursor: pointer;
 }
 
+.content__button--right{
+    float:right;
+}
 
 .content__button:hover, .content__btn-more-post:hover {
     background-color: var(--color-background-btn-success-hover);
     border-color: var(--color-border-btn-success-hover);
 }
-
 
 .content__posts{
     width: 100%;
@@ -377,8 +378,6 @@ body {
     text-align: center;
 }
 
-
-
 .following__title{
     display: block;
     font-weight: bold;
@@ -393,7 +392,6 @@ body {
 .following__link:hover >  .following__number{
     color: var(--color-hover-navbar);
 }
-
 
 .aside__container-form{
     width: 100%;
@@ -458,7 +456,6 @@ textarea:focus{
 .form-post__image{
     width: 100%;
 }
-
 
 .form-post__btn-submit,
 input[type="submit"],
