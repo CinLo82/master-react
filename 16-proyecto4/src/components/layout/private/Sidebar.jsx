@@ -13,30 +13,65 @@ export const Sidebar = () => {
 
     const savePublication = async(e) => {
         e.preventDefault();
+
+        const token = localStorage.getItem('token')
+
         //Recoger los datos del formulario
         let newPublication = form
         newPublication.user = auth._id
 
-        //hacer request para guardar la bd
-        const request = await fetch(Global.url + 'publication/save', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
-            },
-            body: JSON.stringify(newPublication)
-        })
-        if (request.ok) {
-            const newPublication = await request.json();
-            console.log(newPublication); // Verifica que la respuesta sea correcta
-            setStored('success');
-        } else {
+        try {
+            // Hacer request para guardar en la BD
+            const request = await fetch(Global.url + 'publication/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify(newPublication)
+            });
+
+            const data = await request.json();
+
+            // Mostrar mensaje de éxito o error
+            if (data.status === 'success' || data.newPublication) {
+                setStored('success');
+
+                // Subir imagen
+                const fileInput = document.querySelector('#file');
+                if (fileInput) {
+                    if (fileInput.files && fileInput.files[0]) {
+                        const formData = new FormData();
+                        formData.append('file0', fileInput.files[0]);
+                        const uploadRequest = await fetch(Global.url + 'publication/upload/' + data.newPublication._id, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': token
+                            },
+                            body: formData
+                        });
+                          console.log('Upload request sent');
+                        if (uploadRequest.ok) {
+                            const response = await uploadRequest.json();
+                            console.log('response', response);
+                            setStored('success');
+                        } else {
+                            setStored('error');
+                        }
+                    } else {
+                        setStored('error');
+                    }
+                } else {
+                    setStored('error');
+                }
+            } else {
+                setStored('error');
+            }
+        } catch (error) {
+            console.error('Error:', error);
             setStored('error');
         }
-
-        // subir imagen
-
-    }
+    };
 
     return (
         <>
@@ -106,7 +141,8 @@ export const Sidebar = () => {
                                 </label>
                                 <input 
                                     type="file" 
-                                    name="image" 
+                                    name="file0" 
+                                    id="file"
                                     className="form-post__image" 
                                 />
                             </div>
