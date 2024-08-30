@@ -2,16 +2,32 @@ import { useEffect, useState } from 'react';
 import { GetProfile } from '../../helpers/GetProfile';
 import { useParams } from 'react-router-dom';
 import { Global } from '../../helpers/Global';
+import { Link } from 'react-router-dom';
 import avatar from '../../assets/img/user.png';
 
 export const Profile = () => {
 
     const [user, setUser] = useState({})
     const params = useParams()
+    const [counters, setCounters] = useState({})
 
     useEffect(() => {
         GetProfile({userId: params.userId, setUserProfile: setUser})
+        getCounters()
     }, [])
+
+    const getCounters = async() => {
+        const request = await fetch(Global.url + 'user/counters/' + params.userId, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            },
+            method: 'GET'
+        })
+        const data = await request.json()
+        setCounters(data)
+    }
+
 
     return (
         <>
@@ -45,24 +61,24 @@ export const Profile = () => {
                     <div className="profile-info__stats">
 
                         <div className="stats__following">
-                            <a href="#" className="following__link">
+                            <Link to={'/social/siguiendo/'+user._id} className="following__link">
                                 <span className="following__title">Siguiendo</span>
-                                <span className="following__number">10</span>
-                            </a>
+                                <span className="following__number">{counters.following}</span>
+                            </Link>
                         </div>
                         <div className="stats__following">
-                            <a href="#" className="following__link">
+                            <Link to={'/social/seguidores/'+user._id} className="following__link">
                                 <span className="following__title">Seguidores</span>
-                                <span className="following__number">13</span>
-                            </a>
+                                <span className="following__number">{counters.followed}</span>
+                            </Link>
                         </div>
 
 
                         <div className="stats__following">
-                            <a href="#" className="following__link">
+                            <Link to={'/social/perfil/'+user._id} className="following__link">
                                 <span className="following__title">Publicaciones</span>
-                                <span className="following__number">17</span>
-                            </a>
+                                <span className="following__number">{counters.publications}</span>
+                            </Link>
                         </div>
 
 
