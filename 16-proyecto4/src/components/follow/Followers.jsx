@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Global } from '../../helpers/Global';
 import { UserList } from '../user/UserList';
 import { useParams } from 'react-router-dom';
+import { GetProfile } from '../../helpers/GetProfile';
 
 export const Followers = () => {
 
@@ -12,10 +13,15 @@ export const Followers = () => {
     const [page, setPage] = useState(1)
     const [following, setFollowing] = useState([])
     const [loading, setLoading] = useState(true)
+    const [userProfile, setUserProfile] = useState({})
 
     useEffect(() => {
         getUsers(1);
-    }, [])
+        GetProfile({
+            userId: params.userId, 
+            setUserProfile
+        })
+    },  [params.userId])
 
     const getUsers = async (nextPage = 1) => {
         // Sacra userId de la url
@@ -83,7 +89,7 @@ export const Followers = () => {
         <>
             <section className="layout__content">
                 <header className="content__header">
-                    <h1 className="content__title">Seguidores de Alexia!</h1>
+                    <h1 className="content__title">Seguidores de {userProfile.name} {userProfile.surname}</h1>
                 </header>
                 <UserList 
                     users={users}

@@ -55,6 +55,8 @@ export const Sidebar = () => {
                             const response = await uploadRequest.json();
                             console.log('response', response);
                             setStored('success');
+                             // Resetear el formulario
+                            document.getElementById('publication-form').reset();
                         } else {
                             setStored('error');
                         }
@@ -122,6 +124,7 @@ export const Sidebar = () => {
                         <form 
                             className="container-form__form-post"
                             onSubmit={savePublication}
+                            id='publication-form'
                         >
                             <div className="form-post__inputs">
                                 <label htmlFor="text" className="form-post__label">¿Que estas pesando hoy?</label>
