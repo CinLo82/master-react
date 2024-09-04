@@ -26,6 +26,8 @@ export const Profile = () => {
         })
         const data = await request.json()
         setCounters(data)
+        console.log(data)
+
     }
 
 
