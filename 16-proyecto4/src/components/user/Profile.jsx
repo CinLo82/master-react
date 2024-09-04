@@ -4,17 +4,34 @@ import { useParams } from 'react-router-dom';
 import { Global } from '../../helpers/Global';
 import { Link } from 'react-router-dom';
 import avatar from '../../assets/img/user.png';
+import { useAuth } from '../../hooks/useAuth';
 
 export const Profile = () => {
 
+    const { auth } = useAuth()
     const [user, setUser] = useState({})
     const params = useParams()
     const [counters, setCounters] = useState({})
+    const [iFollow, setIFollow] = useState(false)
+    
 
     useEffect(() => {
-        GetProfile({userId: params.userId, setUserProfile: setUser})
+        getDataUser()
         getCounters()
     }, [])
+
+    useEffect(() => {
+        getDataUser()
+        getCounters()
+    }, [params])
+
+    const getDataUser = async() => {
+        let dataUser = await GetProfile({userId: params.userId, setUserProfile: setUser})
+       
+        if (dataUser.following && dataUser.following._id) {
+            setIFollow(true)
+        }
+    } 
 
     const getCounters = async() => {
         const request = await fetch(Global.url + 'user/counters/' + params.userId, {
@@ -24,12 +41,55 @@ export const Profile = () => {
             },
             method: 'GET'
         })
-        const data = await request.json()
-        setCounters(data)
-        console.log(data)
-
+        const data = await request.json();
+        if (data.following !== undefined) {
+            setCounters(data);
+            console.log('data',data);
+        }
     }
 
+    const follow = async (userId) => {
+        try {
+            const request = await fetch(Global.url + 'follow/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('token')
+                },
+                body: JSON.stringify({followed: userId})
+            })
+
+            const data = await request.json()
+
+            if(data.status === 'success'){
+                setIFollow(true)
+            }
+        } catch (error) {
+            console.error('Error al seguir al usuario:', error)
+        }
+    }
+
+    const unFollow = async (userId) => {
+         try {
+            const request = await fetch(Global.url + 'follow/unfollow/' + userId, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('token')
+                },
+                body: JSON.stringify({followed: userId})
+            })
+
+            const data = await request.json()
+
+            if(data.status === 'success'){
+                setIFollow(false)
+            }
+        } catch (error) {
+            console.error('Error al dejar de seguir al usuario:', error)
+        }
+    }
+  
 
     return (
         <>
@@ -51,11 +111,28 @@ export const Profile = () => {
                         <div className="general-info__container-names">
                             <div className="container-names__name">
                                 <h1>{user.name} {user.surname}</h1> 
-                                <button className="content__button content__button--right">Seguir</button>
+                                {
+                                    auth._id !== user._id && (
+                                        iFollow ?
+                                            <button 
+                                                className="content__button content__button--right post__button"
+                                                onClick={() => unFollow(user._id)}
+                                            >
+                                                Dejar de Seguir
+                                            </button>
+                                            :
+                                            <button 
+                                                className="content__button content__button--right"
+                                                onClick={() => follow(user._id)}
+                                            >
+                                                seguir
+                                            </button>
+                                    )
+                                }
                             </div>
                        
-                            <h2 className="container-names__nickname">{user.nick}</h2>
-                            <p>Biografia</p>
+                            <h2 className="container-names__nickname">@{user.nick}</h2>
+                            <p>{user.bio}</p>
                             
                         </div>
                     </div>

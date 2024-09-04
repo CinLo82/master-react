@@ -21,6 +21,7 @@ export const GetProfile = async ({userId, setUserProfile}) => {
         if(data.status === 'success'){
             setUserProfile(data.userProfile)
         }
+        return data
     } catch (error) {
         console.error('Error al obtener el perfil:', error)
     }

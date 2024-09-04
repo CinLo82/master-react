@@ -6,29 +6,29 @@ import { GetProfile } from '../../helpers/GetProfile';
 
 export const Followers = () => {
 
-    const params = useParams()
+    const params = useParams();
 
-    const [users, setUsers] = useState([])
-    const [more, setMore] = useState(true)
-    const [page, setPage] = useState(1)
-    const [following, setFollowing] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [userProfile, setUserProfile] = useState({})
+    const [users, setUsers] = useState([]);
+    const [more, setMore] = useState(true);
+    const [page, setPage] = useState(1);
+    const [following, setFollowing] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [userProfile, setUserProfile] = useState({});
 
     useEffect(() => {
         getUsers(1);
         GetProfile({
             userId: params.userId, 
             setUserProfile
-        })
-    },  [params.userId])
+        });
+    }, [params.userId]);
 
     const getUsers = async (nextPage = 1) => {
-        // Sacra userId de la url
-        const userId = params.userId
+        // Sacar userId de la url
+        const userId = params.userId;
 
-        setLoading(true)
-        const token = localStorage.getItem('token')
+        setLoading(true);
+        const token = localStorage.getItem('token');
 
         try {
             const request = await fetch(Global.url + 'follow/followers/' + userId + '/' + nextPage, { 
@@ -42,13 +42,16 @@ export const Followers = () => {
             const data = await request.json();
             setLoading(false);
 
-            if (data.user_follow_me && data.status === 'success') {
-                 // Recorrer y limpiar user_follow_me para quedarme con los IDs
-                 let userIds = data.user_follow_me;
- 
+            if (data.follows && data.status === 'success') {
+                // Recorrer y limpiar user_follow_me para quedarme con los IDs
+                let userIds = data.follows.map(follow => follow.followed._id);
+
+                // Filtrar IDs duplicados
+                userIds = Array.from(new Set(userIds));
+                
                 // Hacer una solicitud adicional para obtener los detalles completos de cada usuario
                 const userDetailsPromises = userIds.map(id => 
-                     fetch(Global.url + 'user/profile/' + id, {
+                    fetch(Global.url + 'user/profile/' + id, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',
@@ -56,9 +59,10 @@ export const Followers = () => {
                         }
                     }).then(response => response.json())
                 );
- 
+
                 const userDetails = await Promise.all(userDetailsPromises);
- 
+                console.log('userdetail', userDetails);
+
                 // Crear un estado para poder listarlos
                 let newUsers = userDetails.map(detail => detail.userProfile);
                 if (users.length >= 1) {
@@ -82,6 +86,7 @@ export const Followers = () => {
             }
         } catch (error) {
             console.error('Error al obtener los usuarios:', error)
+            setLoading(false)
         }
     }
 
@@ -101,9 +106,7 @@ export const Followers = () => {
                     page={page}
                     setPage={setPage}
                 />
- 
-   
             </section>
         </>
-    )
-}
+    );
+};
