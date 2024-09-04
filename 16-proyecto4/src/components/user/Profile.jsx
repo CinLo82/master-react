@@ -13,16 +13,21 @@ export const Profile = () => {
     const params = useParams()
     const [counters, setCounters] = useState({})
     const [iFollow, setIFollow] = useState(false)
+    const [publications, setPublications] = useState([])
+    const [page, setPage] = useState(1)
     
+    const token = localStorage.getItem('token')
 
     useEffect(() => {
         getDataUser()
         getCounters()
+        getPublications()
     }, [])
 
     useEffect(() => {
         getDataUser()
         getCounters()
+        getPublications()
     }, [params])
 
     const getDataUser = async() => {
@@ -37,7 +42,7 @@ export const Profile = () => {
         const request = await fetch(Global.url + 'user/counters/' + params.userId, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
+                'Authorization': token
             },
             method: 'GET'
         })
@@ -54,7 +59,7 @@ export const Profile = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem('token')
+                    'Authorization': token
                 },
                 body: JSON.stringify({followed: userId})
             })
@@ -75,7 +80,7 @@ export const Profile = () => {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem('token')
+                    'Authorization': token
                 },
                 body: JSON.stringify({followed: userId})
             })
@@ -89,7 +94,31 @@ export const Profile = () => {
             console.error('Error al dejar de seguir al usuario:', error)
         }
     }
+
+    const getPublications = async(nextPage = 1) => {
+        const request = await fetch(Global.url + 'publication/user/' + params.userId  + '/' + nextPage, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            method: 'GET'
+        })
+        const data = await request.json()
+        console.log('data',data);
+        if(data.status === 'success'){
+            let newPublications = data.publications
+            if(publications.length >= 1){
+                newPublications = [...publications, ...data.publications]
+            }
+            setPublications(newPublications)
+        }
+    }
   
+    const nextPage = () => {
+        let next = page + 1
+        setPage(next)
+        getPublications(next)
+    }
 
     return (
         <>
@@ -165,42 +194,53 @@ export const Profile = () => {
                 </header>
               
                 <div className="content__posts">
-                    <article className="posts__post">
+                {publications.map(publication => (
+                    <article className="posts__post" key={publication._id}>
 
                         <div className="post__container">
 
                             <div className="post__image-user">
-                                <a href="#" className="post__image-link">
-                                    <img src={avatar} className="post__user-image" alt="Foto de perfil" />
-                                </a>
+                                <Link 
+                                    to={'/social/perfil/' + publication.user._id}             className="post__image-link">
+                                    {publication.user && publication.user.image && publication.user.image !== 'default.png' ? (
+                                        <img
+                                            src={Global.url + 'user/avatar/' + publication.user.image}
+                                            className="post__user-image"
+                                            alt="Foto de perfil"
+                                        />
+                                    ) : (
+                                        <img src={avatar} className="post__user-image" alt="Foto de perfil" />
+                                    )}
+                                </Link>
                             </div>
 
                             <div className="post__body">
 
                                 <div className="post__user-info">
-                                    <a href="#" className="user-info__name">Victor Robles</a>
+                                    <a href="#" className="user-info__name">{publication.user.name}</a>
                                     <span className="user-info__divider"> | </span>
-                                    <a href="#" className="user-info__create-date">Hace 1 hora</a>
+                                    <a href="#" className="user-info__create-date">{new Date(publication.created_at).toLocaleString()}</a>
                                 </div>
 
-                                <h4 className="post__content">Hola, buenos dias.</h4>
+                                <h4 className="post__content">{publication.text}</h4>
 
                             </div>
-                            </div>
-        
-                    <div className="post__buttons">
-
-                        <a href="#" className="post__button">
-                            <i className="fa-solid fa-trash-can"></i>
-                        </a>
                         </div>
+                        {publication.user && auth._id === publication.user._id && (
+                            <div className="post__buttons">
+                                <a href="#" className="post__button">
+                                    <i className="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
+                        )}
                 
                 </article>
-
+                ))}
                 </div>
 
                 <div className="content__container-btn">
-                    <button className="content__btn-more-post">
+                    <button className="content__btn-more-post"
+                    onClick={nextPage}>
                         Ver mas publicaciones
                     </button>
                 </div>
